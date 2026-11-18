@@ -1,0 +1,27 @@
+
+A Marketing services company reported that the typical American spends a mean of 144 minutes (2.4 hours) per day accessing the Internet via a mobile device. Select a sample of 30 friends and family members whose mobile access time is stored in a CSV file “InternetMobileTime.csv”. Is there evidence that the population mean time spent per day accessing the Internet via mobile device is different from 144 minutes? (Level of Significance α = 0.05)
+import pandas as pd
+
+from scipy.stats import ttest_1samp
+
+# Read CSV file
+data = pd.read_csv("InternetMobileTime.csv")
+
+# Mobile Internet access time
+x = data.iloc[:, 0]
+
+# One-sample t-test
+t, p = ttest_1samp(x, 144)
+
+# Display results
+print("Sample Mean =", x.mean())
+print("t-value =", t)
+print("p-value =", p)
+
+# Decision at 5% significance level
+if p < 0.05:
+    print("Reject H0")
+    print("There is evidence that the population mean is different from 144 minutes.")
+else:
+    print("Fail to Reject H0")
+    print("There is no evidence that the population mean is different from 144 minutes.")
